@@ -1,0 +1,20 @@
+# raw data (download from Kaggle, see README)
+data/raw/*
+!data/raw/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# training outputs
+outputs/*.pt
+outputs/figures/*.png
+
+# notebooks
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.vscode/
