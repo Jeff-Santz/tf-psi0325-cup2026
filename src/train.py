@@ -52,7 +52,7 @@ def main():
     y_val_t = torch.from_numpy(y_val)
 
     model = MatchOutcomeMLP(input_dim=len(FEATURES))
-    optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+    optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
     criterion = nn.CrossEntropyLoss()
 
     train_loss_history = []
