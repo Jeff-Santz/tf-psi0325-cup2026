@@ -42,7 +42,7 @@ python src/train_linear.py      # trains the linear baseline
 python src/compare_models.py    # compares MLP vs. linear baseline on the test set
 ```
 
-The full pipeline (with explanations and discussion of results) is also available as a runnable report in `notebooks/trabalho_final.ipynb`.
+The full pipeline (with explanations and discussion of results) is also available as a runnable report in `notebooks/final_work.ipynb`.
 
 ## Predicting a hypothetical match
 
