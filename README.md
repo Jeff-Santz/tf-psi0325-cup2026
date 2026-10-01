@@ -72,6 +72,6 @@ The trained model weights are saved to `outputs/trained_model.pt` (MLP) and `out
 data/raw/            original dataset (download manually)
 data/processed/      generated train.csv, test.csv, team_state.csv
 src/                 code (dataset, models, training, evaluation, prediction)
-notebooks/           trabalho_final.ipynb — final deliverable
+notebooks/           final_work.ipynb — final deliverable
 outputs/             trained models and figures
 ```
