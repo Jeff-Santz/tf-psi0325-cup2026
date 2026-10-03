@@ -14,15 +14,16 @@ from sklearn.metrics import confusion_matrix, roc_curve, auc
 from model import MatchOutcomeMLP
 
 CLASS_NAMES = ["home_win", "draw", "away_win"]
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def main():
-    checkpoint = torch.load("outputs/trained_model.pt")
+    checkpoint = torch.load("outputs/trained_model.pt", map_location=DEVICE)
     features = checkpoint["features"]
     mean = checkpoint["feature_mean"]
     std = checkpoint["feature_std"]
 
-    model = MatchOutcomeMLP(input_dim=len(features))
+    model = MatchOutcomeMLP(input_dim=len(features)).to(DEVICE)
     model.load_state_dict(checkpoint["model_state"])
     model.eval()
 
@@ -31,8 +32,8 @@ def main():
     y_test = test_df["result"].values.astype(np.int64)
 
     X_test = (X_test - mean) / std
-    X_test_t = torch.from_numpy(X_test)
-    y_test_t = torch.from_numpy(y_test)
+    X_test_t = torch.from_numpy(X_test).to(DEVICE)
+    y_test_t = torch.from_numpy(y_test).to(DEVICE)
 
     with torch.no_grad():
         logits = model(X_test_t)
@@ -45,9 +46,9 @@ def main():
     print(f"Cross-entropy loss: {ce_loss:.4f}")
     print(f"Accuracy (secondary metric): {accuracy:.3f}")
 
-    plot_calibration_curve(probs.numpy(), y_test)
-    plot_confusion_matrix(y_test, preds.numpy())
-    plot_roc_curves(probs.numpy(), y_test)
+    plot_calibration_curve(probs.cpu().numpy(), y_test)
+    plot_confusion_matrix(y_test, preds.cpu().numpy())
+    plot_roc_curves(probs.cpu().numpy(), y_test)
 
 
 def plot_calibration_curve(probs, y_true, n_bins=10):

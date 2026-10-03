@@ -13,6 +13,7 @@ from torch.utils.data import TensorDataset, DataLoader
 from model import MatchOutcomeMLP
 
 FEATURES = ["elo_diff", "home_flag", "elo_home_interaction", "form_diff"]
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 TARGET = "result"
 
 EPOCHS = 100
@@ -48,10 +49,10 @@ def main():
     train_ds = TensorDataset(torch.from_numpy(X_train), torch.from_numpy(y_train))
     train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True)
 
-    X_val_t = torch.from_numpy(X_val)
-    y_val_t = torch.from_numpy(y_val)
+    X_val_t = torch.from_numpy(X_val).to(DEVICE)
+    y_val_t = torch.from_numpy(y_val).to(DEVICE)
 
-    model = MatchOutcomeMLP(input_dim=len(FEATURES))
+    model = MatchOutcomeMLP(input_dim=len(FEATURES)).to(DEVICE)
     optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
     criterion = nn.CrossEntropyLoss()
 
@@ -62,6 +63,7 @@ def main():
         model.train()
         running_loss = 0.0
         for xb, yb in train_loader:
+            xb, yb = xb.to(DEVICE), yb.to(DEVICE)
             optimizer.zero_grad()
             logits = model(xb)
             loss = criterion(logits, yb)

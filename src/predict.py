@@ -17,6 +17,7 @@ import torch
 from model import MatchOutcomeMLP
 
 CLASS_NAMES = ["home_win", "draw", "away_win"]
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def get_team_state(state_df, team_name):
@@ -47,14 +48,14 @@ def predict_match(home_team, away_team, neutral=False,
         home_form - away_form,
     ]], dtype=np.float32)
 
-    checkpoint = torch.load(model_path)
-    model = MatchOutcomeMLP(input_dim=len(checkpoint["features"]))
+    checkpoint = torch.load(model_path, map_location=DEVICE)
+    model = MatchOutcomeMLP(input_dim=len(checkpoint["features"])).to(DEVICE)
     model.load_state_dict(checkpoint["model_state"])
     model.eval()
 
     X = (features - checkpoint["feature_mean"]) / checkpoint["feature_std"]
     with torch.no_grad():
-        probs = torch.softmax(model(torch.from_numpy(X.astype(np.float32))), dim=1)[0]
+        probs = torch.softmax(model(torch.from_numpy(X.astype(np.float32)).to(DEVICE)), dim=1)[0]
 
     return home_elo, away_elo, probs.numpy()
 

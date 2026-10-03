@@ -1,0 +1,7 @@
+date,home_team,away_team,actual,predicted,correct,p_home_win,p_draw,p_away_win,prob_of_actual_outcome
+2026-06-29,Brazil,Japan,home_win,home_win,True,0.46056226,0.2751538,0.26428396,0.46056226
+2026-06-13,Brazil,Morocco,draw,home_win,False,0.4756613,0.27146754,0.25287113,0.27146754
+2026-07-05,Brazil,Norway,away_win,home_win,False,0.6192332,0.23124851,0.14951825,0.14951825
+2026-07-14,France,Spain,away_win,away_win,True,0.34140775,0.28141883,0.37717348,0.37717348
+2026-07-18,France,England,away_win,home_win,False,0.44963652,0.27835068,0.2720127,0.2720127
+2026-07-19,Spain,Argentina,home_win,away_win,False,0.34483078,0.27809566,0.3770736,0.34483078
