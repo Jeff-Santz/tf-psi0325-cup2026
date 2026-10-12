@@ -2,7 +2,7 @@
 
 Final project for PSI0325 — Fundamentals of Adaptation and Machine Learning.
 
-**Student:** Jefferson Santos Monteiro (NUSP 15527878)
+**Student:** Jefferson Santos Monteiro
 
 ## Problem
 
