@@ -40,6 +40,7 @@ python src/train.py             # trains the MLP
 python src/evaluate.py          # cross-entropy, accuracy, calibration/confusion/ROC plots
 python src/train_linear.py      # trains the linear baseline
 python src/compare_models.py    # compares MLP vs. linear baseline on the test set
+python src/sensitivity.py       # sensitivity analysis (Table II), ~1 h; writes outputs/sensitivity.csv
 ```
 
 The full pipeline (with explanations and discussion of results) is also available as a runnable report in `notebooks/final_work.ipynb`.
