@@ -30,6 +30,25 @@ Features (calculated from the history available up to the date of each match):
 - `elo_home_interaction`: `elo_diff × home_flag` — tests whether home advantage depends on the strength gap between the two teams
 - `form_diff`: difference in points earned over the last 10 matches of each national team
 
+## Requirements
+
+- **Python 3.12** (newer versions, e.g. 3.14, may not have prebuilt wheels for PyTorch/pandas yet).
+- CPU is enough; a CUDA GPU is optional (the scripts use it automatically if available).
+
+Create and activate a virtual environment, then install the dependencies:
+
+```bash
+# Windows (PowerShell)
+py -3.12 -m venv .venv
+.venv\Scripts\Activate.ps1
+
+# Linux / macOS
+python3.12 -m venv .venv
+source .venv/bin/activate
+
+pip install -r requirements.txt
+```
+
 ## How to Run
 
 ```bash
