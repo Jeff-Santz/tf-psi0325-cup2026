@@ -52,8 +52,6 @@ pip install -r requirements.txt
 ## How to Run
 
 ```bash
-pip install -r requirements.txt
-
 python src/build_dataset.py     # generates data/processed/{train,test,team_state}.csv
 python src/train.py             # trains the MLP
 python src/evaluate.py          # cross-entropy, accuracy, calibration/confusion/ROC plots
